@@ -45,12 +45,18 @@ dataset_train='/home/abdulrehman/images/train'
 
 training_crossVal(kvalidation_splits=7,train_batch_size=2100,model_train=model,epochs=15,image_directory_path=dataset_train):
 ```
-###Note
+### Note
 On every epoch the dataset fed to the model will be train_batch_size/kvalidation_splits.
 So if you have total training dataset of 10000 images, train_batch_size=2100, kvalidation_splits=7. 
 In every epoch, generator will pick 2100 images with labels randomly and 7 sub-epochs will run having batch of 300 for training and 300 for validation.
 
-So ####total_epochs run in the above example will be 7x15=105 epochs
+### Total Epochs
+
+So in the above example total epochs will be [kvalidation_splits x epochs ]
+
+```
+7x15=105 epochs
+```
 
 The epochs are great in number but the batch size taken for each epoch becomes small and in each epoch data is rotated randomly. It enhances the training capability and time for training is same for the model if other generator with no-sub epochs are used.
 
