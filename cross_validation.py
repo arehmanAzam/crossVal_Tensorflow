@@ -59,8 +59,8 @@ tensorboard =TrainValTensorBoard(write_graph=False)
 #
 callbacks_list2 = [csv_logger,tensorboard]
 
-global image_paths_train
-global labels_train
+image_paths_train=None
+labels_train=None
 def random_batch(train_batch_size=2100):
 
 
@@ -83,7 +83,11 @@ def training_crossVal(kvalidation_splits=7,train_batch_size=2100,model_train=Non
     counter_epoch = 0
     dataset = load_cached(cache_path='my_dataset_cache_repo.pkl',
                           in_dir=image_directory_path)
-    image_paths_train, cls_train, labels_train = dataset.get_training_set()
+    x_train, cls_train, y_train = dataset.get_training_set()
+    global image_paths_train=x_train
+    global labels_train= y_train
+    del x_train
+    del y_train
     for i in range(epochs):
         x, y = random_batch(train_batch_size=train_batch_size)
         images_split = np.split(x, kvalidation_splits)
