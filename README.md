@@ -16,7 +16,7 @@ Numpy         | 15.4.0
 Matplotlib    | 3.0.2
 
 ## Prior Work
-We assume that your dataset is in the form of images. These frames are located in every class-folder of training. 
+We assume that your dataset is in the form of images. These images are located in every class-folder of training. 
 Before getting to this point of work, your code might look like this 
 
 ```
@@ -48,7 +48,7 @@ trained_model=training_crossVal(kvalidation_splits=7,train_batch_size=2100,model
 ### Note
 On every epoch the dataset fed to the model will be train_batch_size/kvalidation_splits.
 So if you have total training dataset of 10000 images, train_batch_size=2100, kvalidation_splits=7. 
-In every epoch, generator will pick 2100 images with labels randomly and 7 sub-epochs will run having batch of 300 for training and 300 for validation.
+In every epoch, generator will pick 2100 images with labels randomly and 7 sub-epochs will run having batch of train_batch_size/kvalidation_splits=300 for training and validation each.
 
 ### Total Epochs
 
