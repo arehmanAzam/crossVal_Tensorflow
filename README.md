@@ -33,11 +33,11 @@ model.compile(optimizer='rmsprop',
               loss='categorical_crossentropy',
               metrics=['accuracy'])
 ```
-## Using DataGenerator Class
+## Using training_crossVal Function
 In python headers where packages are imported code this line
 ```
-from DataGenerator import *
-from dataset import load_cached
+from DataGenerator import training_crossVal
+
 ```
 then pass path of the dataset folders to make or load cache_files for future usage
 
