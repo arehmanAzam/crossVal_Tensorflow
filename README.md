@@ -36,80 +36,26 @@ model.compile(optimizer='rmsprop',
 ## Using training_crossVal Function
 In python headers where packages are imported code this line
 ```
-from DataGenerator import training_crossVal
+from cross_Validation import training_crossVal
 
 ```
-then pass path of the dataset folders to make or load cache_files for future usage
+then pass following parameters for training of the model initialized above.
+```
+dataset_train='/home/abdulrehman/images/train'
 
+training_crossVal(kvalidation_splits=7,train_batch_size=2100,model_train=model,epochs=15,image_directory_path=dataset_train):
 ```
-dataset_train=load_cached(cache_path='give path for making or loading .pkl file ',in_dir=path_dataset_train)
-dataset_val=load_cached(cache_path='give path for making or loading .pkl file ',in_dir=path_dataset_val)
-class_names=dataset_train.class_names
-```
-verify it by 
+Please note that on every epoch the dataset fed to the model will be train_batch_size/kvalidation_splits.
+So if you have total training dataset of 10000 images, train_batch_size=2100, kvalidation_splits=7. 
+In every epoch, generator will pick 2100 images with labels randomly and 7 sub-epochs will run having batch of 300 for training and 300 for validation.
 
-```
-print(class_names)
-```
+So total epochs run in the above example will be 7x15=105 epochs
 
-Now get images path and labels using 
-
-```
-image_path_train,cls_train,labels_train=dataset_train.get_training_set()
-image_path_val, cls_val,labels_val=dataset_val.get_training_set()
-num_classes= dataset_train.num_classes
-```
-
-Concatenate both paths with parameters
-
-```
-partition={'train': image_path_train, 'validation': image_path_val}
-```
-
-Create and change parameters according to your needs for this 3D generators.
-
-```
-number_of_batches=10
-frame_width=400
-frame_height=256
-frames_chunk=18
-params={'dim': (frames_chunk,frame_width,frame_height),
-        'n_channels': 3,
-        'real_batchsize_custom': number_of_batches,
-        'batch_size': frames_chunk*number_of_batches,
-        'n_classes': num_classes,
-        'shuffle': False
-        'frames_chunk' : frames_chunk
-        }
-```
-
-Get labels from the findLabels function
-
-```
-labels_training=findLabels(partition['train'], labels_train)
-labels_validation=findLabels(partition['validation'], labels_val)
-```
+The epochs are great in number but the batch size taken for each epoch becomes small and in each epoch data is rotated randomly, which enhances the training capability.
 
 
-Pass the above created parameters to the main DataGenerator Class
-
-```
-training_generator = DataGenerator(partition['train'], labels_training, **params)
-validation_generator = DataGenerator(partition['validation'], labels_validation, **params)
-```
-
-Give generators to your model.fit_generator() function for training the model
-
-```
-model.fit_generator(...
-        generator=training_generator,
-        validation_data=validation_generator,
-        ..
-        )
-```
 ## Authors
-* [Gulraiz Khan](https://github.com/gulraizk94) (Setting-up base of this project and generator with one batch)
-* [Abdulrehman Azam](https://github.com/arehmanAzam) (Upgraded the generator for multiple batches)
+* [Abdulrehman Azam](https://github.com/arehmanAzam)
 
 ## License
 This project is under GNU General Public License v3.0 see [License](https://github.com/arehmanAzam/3D-CNN_DataGenerator/blob/master/LICENSE) file
