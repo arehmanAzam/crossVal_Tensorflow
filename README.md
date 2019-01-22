@@ -52,8 +52,8 @@ In every epoch, generator will pick 2100 images with labels randomly and 7 sub-e
 
 ### Total Epochs
 
-So in the above example total epochs will be [kvalidation_splits x epochs ]
-
+* Total epochs will be kvalidation_splits x epochs
+* Total epochs for above example are 
 ```
 7x15=105 epochs
 ```
@@ -62,7 +62,7 @@ The epochs are great in number but the batch size taken for each epoch becomes s
 
 
 ## Authors
-* [Abdulrehman Azam](https://github.com/arehmanAzam)
+* [Abdulrehman Azam](https://www.linkedin.com/in/areh-azam)
 
 ## License
 This project is under GNU General Public License v3.0 see [License](https://github.com/arehmanAzam/3D-CNN_DataGenerator/blob/master/LICENSE) file
