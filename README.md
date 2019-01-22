@@ -43,7 +43,7 @@ then pass following parameters for training of the model initialized above.
 ```
 dataset_train='/home/abdulrehman/images/train'
 
-training_crossVal(kvalidation_splits=7,train_batch_size=2100,model_train=model,epochs=15,image_directory_path=dataset_train):
+trained_model=training_crossVal(kvalidation_splits=7,train_batch_size=2100,model_train=model,epochs=15,image_directory_path=dataset_train)
 ```
 ### Note
 On every epoch the dataset fed to the model will be train_batch_size/kvalidation_splits.
